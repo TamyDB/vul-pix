@@ -14,9 +14,8 @@
 <!-- LOGO E TÍTULO -->
 <br />
 <div align="center">
-  <a href="https://github.com/seu-usuario/vulpix">
-    <!-- Substitua pelo logo do projeto quando disponível -->
-    <img src="images/logo.png" alt="VulPix Logo" width="120" height="120">
+  <a href="https://github.com/tamydb/vul-pix">
+    <img src="public/vulpixLogo.svg" alt="VulPix Logo" width="120" height="120">
   </a>
 
   <h1 align="center">🔥 VulPix</h1>
@@ -24,12 +23,12 @@
   <p align="center">
     Plataforma de compra e venda de cartas Pokémon TCG com design intuitivo e fluxo dinâmico para colecionadores.
     <br />
-    <a href="https://github.com/seu-usuario/vulpix"><strong>Explorar a documentação »</strong></a>
+    <a href="https://github.com/tamydb/vul-pix"><strong>Explorar a documentação »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/seu-usuario/vulpix/issues/new?labels=bug">Reportar Bug</a>
+    <a href="https://github.com/tamydb/vul-pix/issues/new?labels=bug">Reportar Bug</a>
     ·
-    <a href="https://github.com/seu-usuario/vulpix/issues/new?labels=enhancement">Sugerir Feature</a>
+    <a href="https://github.com/tamydb/vul-pix/issues/new?labels=enhancement">Sugerir Feature</a>
   </p>
 </div>
 
@@ -64,7 +63,7 @@
 
 ## Sobre o Projeto
 
-<!-- Substitua pela screenshot real quando disponível -->
+<!-- Substituir pela screenshot real quando tivermos -->
 <!-- ![VulPix Screenshot](images/screenshot.png) -->
 
 O **VulPix** é uma plataforma web focada em facilitar a **compra e venda de cartas Pokémon TCG**. O projeto nasceu da necessidade de um ambiente mais intuitivo e dinâmico para colecionadores, tornando o processo de negociação mais simples tanto para compradores quanto para vendedores.
@@ -135,7 +134,7 @@ Certifique-se de ter instalado:
 #### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/vul-pix.git
+git clone https://github.com/tamydb/vul-pix.git
 cd vulpix
 ```
 
@@ -144,30 +143,6 @@ cd vulpix
 ```bash
 npm install
 npm run dev
-```
-
-
-#### 3. Configurar variáveis de ambiente no `.env`
-
-```env
-DB_CONNECTION=pgsql
-DB_HOST=seu-host-supabase
-DB_PORT=5432
-DB_DATABASE=postgres
-DB_USERNAME=seu-usuario
-DB_PASSWORD=sua-senha
-
-GOOGLE_CLIENT_ID=seu-google-client-id
-GOOGLE_CLIENT_SECRET=seu-google-client-secret
-
-POKEMON_TCG_API_KEY=sua-chave-api
-```
-
-#### 4. Rodar as migrations
-
-```bash
-php artisan migrate
-php artisan serve
 ```
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
@@ -251,7 +226,7 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 - [ ] Comunicação entre usuários
 - [ ] Deploy da aplicação
 
-Veja as [issues abertas](https://github.com/seu-usuario/vulpix/issues) para a lista completa de funcionalidades planejadas e bugs conhecidos.
+Veja as [issues abertas](https://github.com/tamydb/vul-pix/issues) para a lista completa de funcionalidades planejadas e bugs conhecidos.
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
@@ -284,7 +259,7 @@ Distribuído sob a licença MIT. Veja `LICENSE.txt` para mais informações.
 **Equipe VulPix**
 
 📧 vulpix.projeto@gmail.com
-🔗 [Link do Repositório](https://github.com/seu-usuario/vulpix)
+🔗 [Link do Repositório](https://github.com/tamydb/vul-pix)
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
