@@ -18,12 +18,11 @@
     <img src="public/vulpixLogo.svg" alt="VulPix Logo" width="120" height="120">
   </a>
 
-  <h1 align="center">🔥 VulPix</h1>
+  <h1 align="center">Vul-Pix</h1>
 
   <p align="center">
     Plataforma de compra e venda de cartas Pokémon TCG com design intuitivo e fluxo dinâmico para colecionadores.
     <br />
-    <a href="https://github.com/tamydb/vul-pix"><strong>Explorar a documentação »</strong></a>
     <br />
     <br />
     <a href="https://github.com/tamydb/vul-pix/issues/new?labels=bug">Reportar Bug</a>
@@ -31,33 +30,6 @@
     <a href="https://github.com/tamydb/vul-pix/issues/new?labels=enhancement">Sugerir Feature</a>
   </p>
 </div>
-
----
-
-<!-- SUMÁRIO -->
-<details>
-  <summary>📋 Sumário</summary>
-  <ol>
-    <li><a href="#sobre-o-projeto">Sobre o Projeto</a>
-      <ul>
-        <li><a href="#tecnologias-utilizadas">Tecnologias Utilizadas</a></li>
-        <li><a href="#arquitetura">Arquitetura</a></li>
-      </ul>
-    </li>
-    <li><a href="#como-começar">Como Começar</a>
-      <ul>
-        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
-        <li><a href="#instalação">Instalação</a></li>
-      </ul>
-    </li>
-    <li><a href="#comunicação-web">Comunicação Web</a></li>
-    <li><a href="#fluxo-de-funcionamento">Fluxo de Funcionamento</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contribuindo">Contribuindo</a></li>
-    <li><a href="#licença">Licença</a></li>
-    <li><a href="#contato">Contato</a></li>
-  </ol>
-</details>
 
 ---
 
@@ -70,13 +42,10 @@ O **VulPix** é uma plataforma web focada em facilitar a **compra e venda de car
 
 ### Principais funcionalidades:
 
-- 🧑‍💼 **Cadastro de Usuários** com autenticação segura via Google
-- 📦 **Inventário pessoal** para gerenciar sua coleção
-- 🛒 **Catálogo de cartas à venda** com integração a API de preços
-- 💬 **Espaço de interação** entre usuários da plataforma
-- 📊 **Análise de mercado** para acompanhar o valor das cartas
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+-  **Cadastro de Usuários** com autenticação segura via Google
+-  **Inventário pessoal** para gerenciar sua coleção
+-  **Catálogo de cartas à venda** com integração a API de preços
+-  **Análise de mercado** para acompanhar o valor das cartas
 
 ---
 
@@ -95,7 +64,6 @@ O **VulPix** é uma plataforma web focada em facilitar a **compra e venda de car
 [![Laravel][Laravel-badge]][Laravel-url]
 [![PostgreSQL][Postgres-badge]][Postgres-url]
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
 ---
 
@@ -113,8 +81,6 @@ Cliente (React) ←──── HTTP/REST ────→ Servidor (Laravel) ←
                                      API Pokémon TCG
 ```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
 ---
 
 ## Como Começar
@@ -124,8 +90,6 @@ Cliente (React) ←──── HTTP/REST ────→ Servidor (Laravel) ←
 Certifique-se de ter instalado:
 
 - [Node.js](https://nodejs.org/) (v18+)
-- [PHP](https://www.php.net/) (v8.1+) + [Composer](https://getcomposer.org/)
-- Conta no [Supabase](https://supabase.com/) para o banco de dados
 - Credenciais do [Google OAuth](https://console.cloud.google.com/)
 - Chave da [Pokémon TCG API](https://pokemontcg.io/)
 
@@ -188,8 +152,6 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 | `404`  | Não encontrado          |
 | `500`  | Erro interno no servidor|
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
 ---
 
 ## Fluxo de Funcionamento
@@ -208,9 +170,8 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 6. Outros usuários visualizam e entram em contato
        ↓
 7. Negociação pelo espaço de interação da plataforma
-```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+```
 
 ---
 
@@ -226,10 +187,6 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 - [ ] Comunicação entre usuários
 - [ ] Deploy da aplicação
 
-Veja as [issues abertas](https://github.com/tamydb/vul-pix/issues) para a lista completa de funcionalidades planejadas e bugs conhecidos.
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
 ---
 
 ## Contribuindo
@@ -241,16 +198,6 @@ Contribuições são bem-vindas! Se tiver sugestões para melhorar o projeto:
 3. Commit suas mudanças (`git commit -m 'feat: adiciona MinhaFeature'`)
 4. Push para a branch (`git push origin feature/MinhaFeature`)
 5. Abra um **Pull Request**
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
----
-
-## Licença
-
-Distribuído sob a licença MIT. Veja `LICENSE.txt` para mais informações.
-
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
 ---
 
