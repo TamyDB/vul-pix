@@ -43,7 +43,6 @@ O **VulPix** é uma plataforma web focada em facilitar a **compra e venda de car
 ### Principais funcionalidades:
 
 -  **Cadastro de Usuários** com autenticação segura via Google
--  **Inventário pessoal** para gerenciar sua coleção
 -  **Catálogo de cartas à venda** com integração a API de preços
 -  **Análise de mercado** para acompanhar o valor das cartas
 
@@ -102,14 +101,13 @@ git clone https://github.com/tamydb/vul-pix.git
 cd vulpix
 ```
 
-#### 2. Como Configurar 
+#### 2. Como Configurar e Rodar
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
-<p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
 ---
 
@@ -179,7 +177,7 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 
 - [x] Levantamento de Requisitos
 - [x] Definição da Arquitetura (MVC)
-- [ ] Protótipo no Figma
+- [x] Protótipo no Figma
 - [ ] Implementação do Front-End (React + Tailwind)
 - [ ] Implementação do Back-End (Laravel)
 - [ ] Integração com Pokémon TCG API
