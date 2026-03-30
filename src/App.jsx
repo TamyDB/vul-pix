@@ -25,7 +25,7 @@ const PokemonEmbed = ({ isVisible, onOpen, onClose }) => {
         className="fixed bottom-8 right-8 z-50 flex items-center gap-2 p-2 rounded-lg transition-all duration-500 ease-in-out bg-transparent hover:bg-black/40 group"
       >
         <span className="max-w-0 overflow-hidden group-hover:max-w-37.5 transition-all duration-500 text-[10px] text-zinc-500 uppercase tracking-widest whitespace-nowrap">
-          Launch Emulator
+          ???
         </span>
 
         <div className="w-2 h-2 rounded-full bg-zinc-800 group-hover:bg-red-600 transition-colors shadow-sm" />
