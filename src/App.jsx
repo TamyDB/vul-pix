@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import viteLogo from '/vite.svg'
+import vulpixLogo from '/vulpixLogo.svg'
 import './App.css'
 
 function App() {
@@ -8,24 +8,20 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="https://github.com/tamydb/vul-pix" target="_blank">
+          <img src={vulpixLogo} className="logo" alt="Vite logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vul-Pix</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          Contador está em {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          WIP
         </p>
+        <p>Clique na logo para ser redirecionado ao repositório do github</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
