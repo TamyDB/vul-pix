@@ -1,0 +1,30 @@
+.d-inline-flex {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 3px 15px;
+    border: 1px solid #E0EEFF;
+    border-radius: 25px;
+    width: 60%;
+    margin: 0 auto;
+    background-color: #E0EEFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.d-inline-flex:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.d-inline-flex input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+.d-inline-flex i {
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #666;
+}
