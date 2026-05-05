@@ -1,0 +1,221 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.pagina-compra {
+  background: linear-gradient(180deg, #B5DBFF, #458CBF);
+  min-height: 100vh;
+  background-attachment: fixed;
+  padding: 100px 5% 40px 5%;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #DAE6F3;
+  border-radius: 16px;
+  padding: 16px 16px 16px 16px;
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  height: auto;
+  min-height: 340px;
+}
+
+.card-img {
+  width: 180px;
+  max-width: 25%;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.info .titulo-carta {
+  color: #0179be;
+  font-size: clamp(18px, 2.5vw, 25px);
+  position: relative;
+  left: 40px;
+}
+
+.info .vendedor {
+  color: #0179be;
+  font-size: clamp(16px, 2vw, 24px);
+  position: relative;
+  left: 80px;
+}
+
+.info .preco-label {
+  color: #00196d;
+  font-weight: bold;
+  font-size: clamp(18px, 2.5vw, 30px);
+  position: relative;
+  left: 20px;
+}
+
+.info .parcelas {
+  color: #0179be;
+  font-size: clamp(14px, 2vw, 24px);
+  position: relative;
+  left: 45px;
+}
+
+.contador {
+  color: #0179be;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-end;
+  margin-top: 8px;
+}
+
+.contador button {
+  background: #CADFE7;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.voltar, .favorito {
+  position: absolute;
+  font-size: clamp(24px, 3vw, 40px);
+  color: #0179be;
+  cursor: pointer;
+}
+
+.voltar { left: 30px; top: 1px; }
+.favorito { right: 30px; top: 16px; }
+
+.descricao {
+  color: #00196d;
+  font-weight: bold;
+  width: 100%;
+  max-width: 950px;
+  margin-top: 20px;
+}
+
+.descricao h2 {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.button1 {
+  display: flex;
+  gap: 5%;
+  padding: 30px 0px 40px 0px;
+  width: 100%;
+  max-width: 950px;
+  justify-content: center;
+}
+
+.button1 button {
+  width: 45%;
+  max-width: 225px;
+  height: 50px;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-size: clamp(16px, 2vw, 22px);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button1 button:nth-child(1) {
+  background: white;
+  color: #0179be;
+  border: 2px solid #4a90b8;
+}
+
+.button1 button:nth-child(2) {
+  background: #4a90b8;
+  color: white;
+  border: none;
+}
+
+.button1 button:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px 16px;
+  }
+
+  .card-img {
+    width: 55%;
+    max-width: 200px;
+  }
+
+  .info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contador {
+    align-self: center;
+  }
+
+  .voltar { left: 12px; top: 12px; }
+  .favorito { right: 12px; top: 12px; }
+
+  .button1 {
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .button1 button {
+    width: 45%;
+  }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+  .card-img {
+    width: 70%;
+  }
+
+  .button1 {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .button1 button {
+    width: 85%;
+    max-width: 100%;
+  }
+}

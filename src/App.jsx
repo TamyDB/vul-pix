@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import vulpixLogo from '/vulpixLogo.svg'
+import PaginaCompra from './teladecompra/PaginaCompra'
 
 const PokemonEmbed = ({ isVisible, onOpen, onClose }) => {
   const startGame = () => {
@@ -52,6 +54,7 @@ const PokemonEmbed = ({ isVisible, onOpen, onClose }) => {
 function App() {
   const [count, setCount] = useState(0)
   const [embeddStarted, setEmbedStarted] = useState(false)
+          const navigate = useNavigate()
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-6">
@@ -68,16 +71,22 @@ function App() {
       </h1>
       <div className="flex gap-4">
         <button
-          className="cursor-pointer px-4 py-2 bg-white font-medium text-black border border-white hover:border-black transition-colors duration-300 rounded-lg"
+          className="cursor-pointer px-4 py-2 bg-white font-medium text-black border border-white hover:border-black transition-colors duration-300 rounded-lg w-fit"
           onClick={() => setCount((count) => count + 1)}
         >
           Contador está em {count}
         </button>
         <button
-          className="cursor-pointer px-4 py-2 bg-white font-medium text-black border border-white hover:border-black transition-colors duration-300 rounded-lg"
+          className="cursor-pointer px-4 py-2 bg-white font-medium text-black border border-white hover:border-black transition-colors duration-300 rounded-lg w-fit"
           onClick={() => setCount(0)}
         >
           Reset
+        </button>
+        <button
+          className="cursor-pointer px-4 py-2 bg-white font-medium text-black border border-white hover:border-black transition-colors duration-300 rounded-lg w-fit"
+          onClick={() => navigate('/compra')}
+          >
+          Ver card
         </button>
       </div>
       <p className="animate-rainbow-fast bg-rainbow-vivid font-extrabold bg-clip-text text-transparent text-md">
@@ -93,4 +102,13 @@ function App() {
   )
 }
 
-export default App
+export default function Root() {
+  return (
+    <HashRouter>  {/* ← troca BrowserRouter por HashRouter */}
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/compra" element={<PaginaCompra />} />
+      </Routes>
+    </HashRouter>
+  )
+}
