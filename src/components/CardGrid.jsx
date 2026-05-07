@@ -24,7 +24,7 @@ function CardItem({ card }) {
         }
       </div>
 
-      {/* Info */}
+      {/* Info */}  
       <div className="p-3 flex flex-col gap-1.5 flex-1">
         <p className="m-0 font-semibold text-sm text-stone-900 leading-tight">
           {card.name ?? '—'}
@@ -51,7 +51,7 @@ function CardItem({ card }) {
 
 export default function CardGrid({ cards = [] }) {
   const containerRef = useRef(null)
-  const [cols, setCols] = useState(6)
+  const [cols, setCols] = useState(4)
 
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => {

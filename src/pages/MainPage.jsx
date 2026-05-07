@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function MainPage() {
   const [cards, setCards] = useState([])
-  const cardIDs = ["swsh3-136", "fut2020-1", "pop3-6"]
+  const cardIDs = ["swsh3-136", "fut2020-1", "pop3-6",]
 
   useEffect(() => {
     async function loadCards() {
