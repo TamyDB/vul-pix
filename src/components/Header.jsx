@@ -9,7 +9,7 @@ export default function Navbar() {
        
         <a href="#">
           <img
-            src="/teste/DANIELE.4mdp.png"
+            src="src/assets/DANIELE.4mdp.png"
             alt="Vul-pix"
             width={200}
             height={100}
