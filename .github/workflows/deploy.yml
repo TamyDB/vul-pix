@@ -34,7 +34,8 @@ jobs:
  
       - name: Install dependencies
         run: |
-          pnpm config set only-allow-trusted-dependencies false
+          node -e "const pkg=require('./package.json'); pkg.pnpm={allowedBuildScripts:['esbuild']}; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2))"
+          
           pnpm install --no-frozen-lockfile
         
       - name: Build
