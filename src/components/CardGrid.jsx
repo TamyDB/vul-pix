@@ -1,65 +1,46 @@
-// components/CardGrid.jsx
 import { useRef, useEffect, useState } from 'react'
 
-const rarityColor = {
-  'Common':    { bg: '#f1efe8', text: '#5f5e5a' },
-  'Uncommon':  { bg: '#e1f5ee', text: '#0f6e56' },
-  'Rare':      { bg: '#e6f1fb', text: '#185fa5' },
-  'Rare Holo': { bg: '#eeedfe', text: '#534ab7' },
+const rarityConfig = {
+  'Common':    { badge: 'bg-stone-100 text-stone-500' },
+  'Uncommon':  { badge: 'bg-emerald-50 text-emerald-700' },
+  'Rare':      { badge: 'bg-blue-50 text-blue-700' },
+  'Rare Holo': { badge: 'bg-indigo-50 text-indigo-600' },
 }
 
 function CardItem({ card }) {
-  const r = rarityColor[card.rarity] ?? { bg: '#f1efe8', text: '#5f5e5a' }
+  const rarity = rarityConfig[card.rarity] ?? rarityConfig['Common']
 
   return (
-    <div style={{
-      background: '#fff',
-      border: '0.5px solid #e0ddd6',
-      borderRadius: '14px',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-      cursor: 'pointer',
-    }}
-      onMouseEnter={e => {
-        e.currentTarget.style.transform = 'translateY(-4px)'
-        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.10)'
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.transform = ''
-        e.currentTarget.style.boxShadow = ''
-      }}
-    >
+    <div className="bg-white border border-stone-200/80 rounded-2xl overflow-hidden flex flex-col cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
       {/* Imagem */}
-      <div style={{ background: '#f7f5f0', display: 'flex', justifyContent: 'center', padding: '1rem' }}>
+      <div className="bg-stone-50 flex justify-center items-center p-4">
         {card.image
-          ? <img src={card.image} alt={card.name} style={{ height: '160px', objectFit: 'contain', borderRadius: '6px' }} />
-          : <div style={{ height: '160px', width: '110px', background: '#e8e5de', borderRadius: '6px' }} />
+          ? <img
+              src={card.image}
+              alt={card.name}
+              className="h-40 object-contain rounded-md"
+            />
+          : <div className="h-40 w-28 bg-stone-200 rounded-md" />
         }
       </div>
 
       {/* Info */}
-      <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-        <p style={{ margin: 0, fontWeight: 600, fontSize: '15px', color: '#1a1a1a' }}>
+      <div className="p-3 flex flex-col gap-1.5 flex-1">
+        <p className="m-0 font-semibold text-sm text-stone-900 leading-tight">
           {card.name ?? '—'}
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{
-            fontSize: '11px', fontWeight: 500, padding: '2px 8px',
-            borderRadius: '999px', background: r.bg, color: r.text,
-          }}>
+        <div className="flex items-center justify-between gap-2">
+          <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${rarity.badge}`}>
             {card.rarity ?? 'Unknown'}
           </span>
-
-          <span style={{ fontSize: '13px', color: '#888', fontFamily: 'monospace' }}>
+          <span className="text-xs text-stone-400 font-mono">
             {card.TCGAPIID}
           </span>
         </div>
 
         {card.price > 0 && (
-          <p style={{ margin: 0, fontSize: '14px', color: '#3b6d11', fontWeight: 600 }}>
+          <p className="m-0 text-sm text-green-700 font-semibold">
             R$ {card.price.toFixed(2)}
           </p>
         )}
@@ -70,7 +51,7 @@ function CardItem({ card }) {
 
 export default function CardGrid({ cards = [] }) {
   const containerRef = useRef(null)
-  const [cols, setCols] = useState(3)
+  const [cols, setCols] = useState(6)
 
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => {
@@ -86,7 +67,7 @@ export default function CardGrid({ cards = [] }) {
 
   if (cards.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '3rem', color: '#aaa', fontSize: '14px' }}>
+      <div className="text-center py-12 text-stone-400 text-sm">
         Nenhuma carta carregada.
       </div>
     )
@@ -95,12 +76,8 @@ export default function CardGrid({ cards = [] }) {
   return (
     <div
       ref={containerRef}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${cols}, 1fr)`,
-        gap: '1rem',
-        padding: '1rem',
-      }}
+      className="grid gap-4 p-4"
+      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
     >
       {cards.map(card => (
         <CardItem key={card.TCGAPIID} card={card} />
