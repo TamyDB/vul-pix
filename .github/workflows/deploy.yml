@@ -33,7 +33,9 @@ jobs:
           cache: "pnpm"
  
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile --only-allow-trusted-dependencies false
+        run: |
+          pnpm config set only-allow-trusted-dependencies false
+          pnpm install --no-frozen-lockfile
         
       - name: Build
         run: pnpm run build
