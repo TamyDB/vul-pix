@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import vulpixLogo from '/vulpixLogo.svg'
+import MainPage from './pages/MainPage'
 
 const PokemonEmbed = ({ isVisible, onOpen, onClose }) => {
   const startGame = () => {
@@ -89,6 +90,7 @@ function App() {
         onOpen={() => setEmbedStarted(true)}
         onClose={() => setEmbedStarted(false)}
       />
+    <MainPage/>
     </div>
   )
 }
