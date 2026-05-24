@@ -1,10 +1,12 @@
 import CardGrid from '../components/CardGrid'
 import Card from '../models/Card'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function MainPage() {
   const [cards, setCards] = useState([])
-  const cardIDs = ["swsh3-136", "fut2020-1", "pop3-6",]
+  const navigate = useNavigate()
+  const cardIDs = ["swsh3-136", "fut2020-1", "pop3-6", "swsh1-1"]
 
   useEffect(() => {
     async function loadCards() {
@@ -13,15 +15,13 @@ export default function MainPage() {
       )
       setCards(result)
     }
-
     loadCards()
   }, [])
 
   return (
-    <>
-      <div>
-        <CardGrid cards={cards} />
-      </div>
-    </>
+    <div>
+      
+      <CardGrid cards={cards} onCardClick={(card) => navigate('/compra', { state: { card } })} />
+    </div>
   )
 }

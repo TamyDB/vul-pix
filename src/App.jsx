@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
+import PaginaCompra from './pages/PaginaCompra'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='flex justify-center'>
-      <MainPage />
-    </div>
+    <BrowserRouter basename="/vul-pix">
+      <div className='w-full'>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/compra" element={<PaginaCompra />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
