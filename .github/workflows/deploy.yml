@@ -24,18 +24,17 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 11
+          version: 10 
  
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20 
           cache: "pnpm"
  
       - name: Install dependencies
         run: |
-          node -e "const pkg=require('./package.json'); pkg.pnpm={allowedBuildScripts:['esbuild']}; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2))"
-          
+          pnpm config set only-built-dependencies esbuild
           pnpm install --no-frozen-lockfile
         
       - name: Build
@@ -44,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./dist 
  
   deploy:
     needs: build
