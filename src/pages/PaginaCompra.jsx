@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import DANIELE from '../assets/DANIELE_4mdp.PNG';
+import DANIELE from '../assets/DANIELE_4mdp.png';
 import { useLocation } from 'react-router-dom'
  
 export default function PaginaCompra() {
