@@ -15,6 +15,7 @@ export default class Card {
         this.name = init.name
         this.price = init.price
         this.rarity = init.rarity
+        this.description = init.description
     }
 
     static async createCard(price, id) {
@@ -31,7 +32,8 @@ export default class Card {
             image: `${cardData.image}/high.png`,
             name: cardData.name,
             price: price,
-            rarity: cardData.rarity
+            rarity: cardData.rarity,
+            description: cardData.description ?? "Sem descrição disponível."
         })
 
         return card

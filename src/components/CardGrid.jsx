@@ -7,11 +7,11 @@ const rarityConfig = {
   'Rare Holo': { badge: 'bg-indigo-50 text-indigo-600' },
 }
 
-function CardItem({ card }) {
+function CardItem({ card, onCardClick }) {
   const rarity = rarityConfig[card.rarity] ?? rarityConfig['Common']
 
   return (
-    <div className="bg-white border border-stone-200/80 rounded-2xl overflow-hidden flex flex-col cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+    <div className="bg-white border border-stone-200/80 rounded-2xl overflow-hidden flex flex-col cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10" onClick={() => onCardClick(card)}>
       {/* Imagem */}
       <div className="bg-stone-50 flex justify-center items-center p-4">
         {card.image
@@ -49,7 +49,7 @@ function CardItem({ card }) {
   )
 }
 
-export default function CardGrid({ cards = [] }) {
+export default function CardGrid({ cards = [], onCardClick }) {
   const containerRef = useRef(null)
   const [cols, setCols] = useState(4)
 
@@ -80,7 +80,7 @@ export default function CardGrid({ cards = [] }) {
       style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
     >
       {cards.map(card => (
-        <CardItem key={card.TCGAPIID} card={card} />
+        <CardItem key={card.TCGAPIID} card={card} onCardClick={onCardClick} />
       ))}
     </div>
   )
