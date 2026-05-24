@@ -1,7 +1,8 @@
 import CardGrid from '../components/CardGrid'
 import Card from '../models/Card'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom' 
+import Header from '../components/Header'
 
 export default function MainPage() {
   const [cards, setCards] = useState([])
@@ -20,7 +21,7 @@ export default function MainPage() {
 
   return (
     <div>
-      
+      <Header></Header>
       <CardGrid cards={cards} onCardClick={(card) => navigate('/compra', { state: { card } })} />
     </div>
   )

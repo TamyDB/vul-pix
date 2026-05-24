@@ -3,13 +3,13 @@ import { FaRegUser } from "react-icons/fa";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#B5DCFD]">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-[#B5DCFD]">
       <div className="flex items-center justify-between px-6 py-2">
 
        
         <a href="#">
           <img
-            src="src/assets/DANIELE.4mdp.png"
+            src="src/assets/DANIELE_4mdp.png"
             alt="Vul-pix"
             width={200}
             height={100}
