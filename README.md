@@ -178,9 +178,9 @@ O front-end (React) consome a API do back-end (Laravel) via requisições HTTP a
 - [x] Levantamento de Requisitos
 - [x] Definição da Arquitetura (MVC)
 - [x] Protótipo no Figma
-- [ ] Implementação do Front-End (React + Tailwind)
+- [X] Implementação do Front-End (React + Tailwind)
 - [ ] Implementação do Back-End (Laravel)
-- [ ] Integração com Pokémon TCG API
+- [X] Integração com Pokémon TCG API
 - [ ] Autenticação via Google OAuth
 - [ ] Comunicação entre usuários
 - [ ] Deploy da aplicação
