@@ -1,5 +1,6 @@
 import { FaMagnifyingGlass, FaHeart, FaCartShopping } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
+import vulpix from '../assets/vulpix.png'
 
 export default function Navbar() {
   return (
@@ -9,7 +10,7 @@ export default function Navbar() {
        
         <a href="#">
           <img
-            src="src/assets/DANIELE_4mdp.png"
+            src={vulpix}
             alt="Vul-pix"
             width={200}
             height={100}
