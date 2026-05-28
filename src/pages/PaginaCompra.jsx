@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import DANIELE from '../assets/DANIELE_4mdp.png';
+import vulpix from '../assets/vulpix.png';
 
 export default function PaginaCompra() {
   const { state } = useLocation()
@@ -14,7 +14,7 @@ export default function PaginaCompra() {
 
       {/* Header */}
       <header className="absolute left-3 top-3 text-[#0179be] text-3xl cursor-pointer transition-transform duration-300 hover:-translate-x-1 select-none">
-        <img src={DANIELE} alt="logo" width={170} height={80} onClick={() => navigate('/')} />
+        <img src={vulpix} alt="logo" width={170} height={80} onClick={() => navigate('/')} />
       </header>
 
       <div className="min-h-screen flex flex-col items-center px-[5%] pb-10 pt-[100px]">

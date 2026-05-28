@@ -3,6 +3,7 @@ import Card from '../models/Card'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom' 
 import Header from '../components/Header'
+import Carousel from '../components/Carousel'
 
 export default function MainPage() {
   const [cards, setCards] = useState([])
@@ -22,6 +23,8 @@ export default function MainPage() {
   return (
     <div>
       <Header></Header>
+      <Carousel></Carousel>
+      <h1 className="text-3xl font-bold text-center my-6">Anuncios</h1>
       <CardGrid cards={cards} onCardClick={(card) => navigate('/compra', { state: { card } })} />
     </div>
   )
