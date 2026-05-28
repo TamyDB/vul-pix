@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "vite build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
@@ -23,15 +20,10 @@
     "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@tailwindcss/vite": "^4.2.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "tailwindcss": "^4.2.4",
     "vite": "^7.3.1"
