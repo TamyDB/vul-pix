@@ -1,23 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
+    /* ── Escala de cor de marca ── */
+    --color-brand-50:  #EBF5FF;
+    --color-brand-100: #DAE6F3;
+    --color-brand-200: #CADFE7;
+    --color-brand-300: #B5DCFD;
+    --color-brand-500: #0179BE;
+    --color-brand-600: #0072C4;
+    --color-brand-700: #458CBF;
+    --color-brand-800: #4A90B8;
+    --color-brand-900: #00196D;
+
+    /* ── Aliases semânticos ── */
+    --color-brand:        var(--color-brand-500);
+    --color-brand-dark:   var(--color-brand-900);
+    --color-brand-nav:    var(--color-brand-300);
+    --color-brand-search: #E0EEFF;
+
+    /* ── Tipografia ── */
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+    /* ── Sombras ── */
+    --shadow-card:    0 4px 12px 0 rgb(0 0 0 / 0.08);
+    --shadow-card-lg: 0 8px 32px 0 rgb(0 0 0 / 0.15);
+
+    /* ── Animação rainbow ── */
     @keyframes rainbow-move {
-        0% {
-            background-position: 0% 0%;
-        }
-
-        100% {
-            background-position: 300% 0%;
-        }
+        0%   { background-position: 0% 0%; }
+        100% { background-position: 300% 0%; }
     }
-
     --animate-rainbow-fast: rainbow-move 6s linear infinite;
 }
 
 @layer utilities {
     .bg-rainbow-vivid {
         background-image: linear-gradient(to left,
-                #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
+            #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
         background-size: 300% 100%;
     }
 }

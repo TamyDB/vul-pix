@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
 import MainPage from './pages/MainPage'
-import PaginaCompra from './pages/PaginaCompra'
-import Cadastro from './pages/Cadastro'
-import Login from './pages/Login'
+import CardDetail from './pages/CardDetail'
+import Layout from './components/layout/Layout'
 
 function App() {
   return (
-    <BrowserRouter basename="/vul-pix">
-      <div className='w-full'>
+    <CartProvider>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/compra" element={<PaginaCompra />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+            <Route path="card/:id" element={<CardDetail />} />
+          </Route>
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CartProvider>
   )
 }
 
