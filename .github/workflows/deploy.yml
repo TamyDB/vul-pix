@@ -1,53 +1,46 @@
 name: Deploy to GitHub Pages
- 
+
 on:
   push:
     branches:
       - main
- 
+
 permissions:
   contents: read
   pages: write
   id-token: write
- 
+
 concurrency:
   group: "pages"
   cancel-in-progress: true
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
- 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10 
- 
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20 
-          cache: "pnpm"
- 
+          node-version: 24
+          cache: "npm"
+
       - name: Install dependencies
-        run: |
-          pnpm config set only-built-dependencies esbuild
-          pnpm install --no-frozen-lockfile
-        
+        run: npm install
+
       - name: Build
-        run: pnpm run build
+        run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
- 
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist 
- 
+          path: ./dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
