@@ -9,7 +9,7 @@ import Layout from './components/layout/Layout'
 function App() {
   return (
     <CartProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/vul-pix">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
