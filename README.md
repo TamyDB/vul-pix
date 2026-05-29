@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tamydb/vul-pix">
-    <img src="public/vulpixLogo.svg" alt="VulPix Logo" width="120" height="120">
+    <img src="src/assets/vulpixLogo.svg" alt="VulPix Logo" width="120" height="120">
   </a>
 
   <h1 align="center">Vul-Pix</h1>

@@ -8,5 +8,8 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/vul-pix/',
+  server: {
+    port: 8080,
+    host: true,
+  }
 })

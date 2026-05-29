@@ -1,87 +1,113 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { supabase } from '../lib/supabaseClient'
+import { Link, useNavigate } from 'react-router-dom'
+import Input from '../components/ui/Input'
+import Button from '../components/ui/Button'
+import { useAuth } from '../context/AuthContext'
+import AuthCard from '../components/layout/AuthCard'
 
-const Cadastro = () => {
+function validate(form) {
+  const errs = {}
+  if (!form.name || form.name.trim().length < 2)
+    errs.name = 'Nome deve ter pelo menos 2 caracteres'
+  if (!form.email)
+    errs.email = 'E-mail é obrigatório'
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+    errs.email = 'E-mail inválido'
+  if (!form.password || form.password.length < 6)
+    errs.password = 'Senha deve ter pelo menos 6 caracteres'
+  if (form.password !== form.confirmPassword)
+    errs.confirmPassword = 'As senhas não coincidem'
+  return errs
+}
+
+export default function Cadastro() {
+  const { register } = useAuth()
   const navigate = useNavigate()
-  const [nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [erro, setErro] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  const handleCadastro = async (e) => {
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' })
+  const [errors, setErrors] = useState({})
+  const [globalError, setGlobalError] = useState('')
+
+  const set = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }))
+
+  function handleSubmit(e) {
     e.preventDefault()
-    setLoading(true)
-    setErro('')
+    setGlobalError('')
+    const errs = validate(form)
+    if (Object.keys(errs).length) { setErrors(errs); return }
+    setErrors({})
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password: senha,
-      options: {
-        data: { nome_completo: nome }
-      }
-    })
-
-    if (error) {
-      setErro(error.message)
-    } else {
-      alert('Cadastro feito! Verifique seu e-mail.')
-      navigate('/')
-    }
-
-    setLoading(false)
+    const result = register(form.name.trim(), form.email, form.password)
+    if (!result.success) { setGlobalError(result.message); return }
+    navigate('/')
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <form onSubmit={handleCadastro} className="flex flex-col gap-4 bg-white p-8 rounded-xl shadow-md w-80">
-        <h1 className="text-2xl font-bold text-[#0179be]">Cadastro</h1>
+    <AuthCard>
+      <h1 className="text-2xl font-bold text-gray-900 mb-1">Crie sua conta</h1>
+      <p className="text-gray-500 text-sm mb-6">Cadastre-se e comece a colecionar</p>
 
-        {erro && <p className="text-red-500 text-sm">{erro}</p>}
+      {globalError && (
+        <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg px-4 py-3 mb-5">
+          {globalError}
+        </div>
+      )}
 
-        <input
-          type="text"
-          placeholder="Nome Completo"
-          value={nome}
-          onChange={e => setNome(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0179be]"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0179be]"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={e => setSenha(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0179be]"
-          required
-        />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+          <Input
+            placeholder="Seu nome completo"
+            value={form.name}
+            onChange={set('name')}
+            error={errors.name}
+          />
+        </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-[#0179be] text-white py-2 rounded-lg hover:opacity-90 transition disabled:opacity-50"
-        >
-          {loading ? 'Cadastrando...' : 'Cadastre-se'}
-        </button>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+          <Input
+            type="email"
+            placeholder="seu@email.com"
+            value={form.email}
+            onChange={set('email')}
+            error={errors.email}
+          />
+        </div>
 
-        <p className="text-sm text-center">
-          Já tem conta?{' '}
-          <span className="text-[#0179be] cursor-pointer font-bold" onClick={() => navigate('/login')}>
-            Entrar
-          </span>
-        </p>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+          <Input
+            type="password"
+            placeholder="Mínimo 6 caracteres"
+            value={form.password}
+            onChange={set('password')}
+            error={errors.password}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar senha</label>
+          <Input
+            type="password"
+            placeholder="••••••••"
+            value={form.confirmPassword}
+            onChange={set('confirmPassword')}
+            error={errors.confirmPassword}
+          />
+        </div>
+
+        <Button type="submit" variant="primary" size="md" className="w-full mt-2">
+          Criar conta
+        </Button>
       </form>
-    </div>
+
+      <p className="text-center text-sm text-gray-500 mt-6">
+        Já tem uma conta?{' '}
+        <Link to="/login" className="text-brand-500 font-semibold hover:underline">
+          Entrar
+        </Link>
+      </p>
+    </AuthCard>
   )
 }
-
-export default Cadastro
