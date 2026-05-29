@@ -1,7 +1,7 @@
 import { createContext, useContext, useCallback, useState, useEffect, useRef } from "react"
 import { Database } from "../lib/database"
 
-const DbContext = createContext(null)
+export const DbContext = createContext(null)
 
 export function DatabaseProvider({ children }) {
     const db = useRef(new Database())

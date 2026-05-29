@@ -1,3 +1,6 @@
+import { useContext } from "react"
+import { DbContext } from "../context/DatabaseProvider"
+
 export function useDb() {
     const { db, commit } = useContext(DbContext)
     if (!db) throw new Error("useDb must be used inside <DatabaseProvider>")

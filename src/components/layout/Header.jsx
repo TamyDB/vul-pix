@@ -3,9 +3,11 @@ import { FaRegUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import vulpix from '../../assets/vulpix.png'
 import { useCart } from '../../context/CartContext'
+import { useAuth } from '../../context/AuthContext'
 
 export default function Header() {
     const { count, setIsOpen } = useCart()
+    const { user } = useAuth()
 
     return (
         <nav className="sticky top-0 left-0 right-0 z-50 bg-brand-nav">
@@ -51,9 +53,19 @@ export default function Header() {
                         )}
                     </button>
 
-                    <Link to="/perfil">
-                        <FaRegUser className="text-xl text-brand-600" />
-                    </Link>
+                    {user ? (
+                        <Link to="/perfil" className="flex items-center gap-1.5 text-brand-600 hover:text-brand-500 transition-colors">
+                            <FaRegUser className="text-xl" />
+                            <span className="hidden sm:block text-sm font-medium max-w-24 truncate">{user.name}</span>
+                        </Link>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className="text-sm font-semibold px-4 py-1.5 rounded-full bg-brand-500 text-white hover:opacity-90 transition-opacity"
+                        >
+                            Entrar
+                        </Link>
+                    )}
                 </div>
 
             </div>
