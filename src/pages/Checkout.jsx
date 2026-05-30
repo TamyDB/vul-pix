@@ -43,7 +43,10 @@ const BOLETO_NUM = '03399.31904 41000.000003 02085.301020 9 10700000001000'
 const BOLETO_BARCODE_VAL = '03399319044100000000302085301020910700000001000'
 
 function fmt(v) {
-  return Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  return Number(v).toLocaleString('pt-BR', { 
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
 }
 
 function maskCard(v) {
