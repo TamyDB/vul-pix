@@ -20,7 +20,7 @@ function validate(form) {
   return errs
 }
 
-export default function Cadastro() {
+export default function Register() {
   const { register } = useAuth()
   const navigate = useNavigate()
 

@@ -1,84 +1,145 @@
-import { useRef, useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { FiHeart, FiShoppingCart } from 'react-icons/fi'
+import Badge from './ui/Badge'
+import Button from './ui/Button'
+import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
+import { useDb } from '../hooks/useDb'
 
-const rarityConfig = {
-  'Common':    { badge: 'bg-stone-100 text-stone-500' },
-  'Uncommon':  { badge: 'bg-emerald-50 text-emerald-700' },
-  'Rare':      { badge: 'bg-blue-50 text-blue-700' },
-  'Rare Holo': { badge: 'bg-indigo-50 text-indigo-600' },
-}
+const DISCOUNT_OPTIONS = [10, 15, 20, 25, 30]
 
 function CardItem({ card, onCardClick }) {
-  const rarity = rarityConfig[card.rarity] ?? rarityConfig['Common']
+  const { addItem } = useCart()
+  const { user } = useAuth()
+  const db = useDb()
+
+  const [originalPrice] = useState(() => +(Math.random() * 280 + 9.9).toFixed(2))
+  const [discount] = useState(() => {
+    if (Math.random() > 0.35) return 0
+    return DISCOUNT_OPTIONS[Math.floor(Math.random() * DISCOUNT_OPTIONS.length)]
+  })
+
+  const finalPrice = discount > 0
+    ? +(originalPrice * (1 - discount / 100)).toFixed(2)
+    : originalPrice
+
+  const [liked, setLiked] = useState(false)
+  const [favoriteId, setFavoriteId] = useState(null)
+
+  useEffect(() => {
+    if (!user) return
+    const favs = db.getAll('favorites')
+    const existing = favs.find(f => f.userId === user.id && f.card?.TCGAPIID === card.TCGAPIID)
+    if (existing) {
+      setLiked(true)
+      setFavoriteId(existing.id)
+    }
+  }, [user, card.TCGAPIID])
+
+  const fmtPrice = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation()
+    addItem(card, finalPrice, discount)
+  }
+
+  function handleToggleLike(e) {
+    e.stopPropagation()
+    if (!user) {
+      setLiked(l => !l)
+      return
+    }
+    if (liked && favoriteId) {
+      db.delete('favorites', favoriteId)
+      setLiked(false)
+      setFavoriteId(null)
+    } else {
+      const id = db.save('favorites', { userId: user.id, card })
+      setLiked(true)
+      setFavoriteId(id)
+    }
+  }
 
   return (
-    <div className="bg-white border border-stone-200/80 rounded-2xl overflow-hidden flex flex-col cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10" onClick={() => onCardClick(card)}>
-      {/* Imagem */}
-      <div className="bg-stone-50 flex justify-center items-center p-4">
+    <div
+      className="group bg-white rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-card hover:shadow-card-lg transition-shadow duration-300"
+      onClick={() => onCardClick(card)}
+    >
+      {/* Área da imagem */}
+      <div className="relative overflow-hidden bg-linear-to-b from-slate-100 to-slate-50 flex justify-center items-end aspect-3/4 px-6 pt-8">
+
+        {discount > 0 && (
+          <div className="absolute top-3 left-3 z-10 bg-rose-500 text-white text-sm font-bold px-2.5 py-1 rounded-full shadow-md tracking-wide">
+            −{discount}% OFF
+          </div>
+        )}
+
+        <button
+          className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm hover:bg-white transition-all duration-150"
+          onClick={handleToggleLike}
+          aria-label={liked ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+        >
+          <FiHeart
+            size={14}
+            className={liked ? 'fill-rose-500 text-rose-500' : 'text-stone-400'}
+            style={{ transition: 'fill 0.15s, color 0.15s' }}
+          />
+        </button>
+
         {card.image
-          ? <img
+          ? (
+            <img
               src={card.image}
               alt={card.name}
-              className="h-40 object-contain rounded-md"
+              className="h-full w-auto object-contain drop-shadow-xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3"
             />
-          : <div className="h-40 w-28 bg-stone-200 rounded-md" />
+          )
+          : <div className="h-full w-full bg-slate-200 rounded-xl flex items-center justify-center p-4" />
         }
       </div>
 
-      {/* Info */}  
-      <div className="p-3 flex flex-col gap-1.5 flex-1">
-        <p className="m-0 font-semibold text-sm text-stone-900 leading-tight">
-          {card.name ?? '—'}
-        </p>
+      {/* Informações */}
+      <div className="px-4 pt-3 pb-4 flex flex-col gap-1.5 flex-1 border-t border-stone-100">
 
-        <div className="flex items-center justify-between gap-2">
-          <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${rarity.badge}`}>
-            {card.rarity ?? 'Unknown'}
-          </span>
-          <span className="text-xs text-stone-400 font-mono">
-            {card.TCGAPIID}
-          </span>
+        <div className="flex items-start justify-between gap-2">
+          <p className="font-semibold text-sm text-stone-900 leading-snug">
+            {card.name ?? '—'}
+          </p>
+          <Badge rarity={card.rarity} />
         </div>
 
-        {card.price > 0 && (
-          <p className="m-0 text-sm text-green-700 font-semibold">
-            R$ {card.price.toFixed(2)}
-          </p>
-        )}
+        <div className="mt-auto pt-2 flex items-center justify-between gap-3">
+          <div className="flex flex-col leading-none gap-0.5">
+            {discount > 0 && (
+              <span className="text-xs text-stone-400 line-through">
+                R$ {fmtPrice(originalPrice)}
+              </span>
+            )}
+            <span className={`text-lg font-bold ${discount > 0 ? 'text-rose-600' : 'text-stone-900'}`}>
+              R$ {fmtPrice(finalPrice)}
+            </span>
+          </div>
+
+          <Button variant="icon" size="lg" onClick={handleAddToCart}>
+            <FiShoppingCart size={17} />
+          </Button>
+        </div>
       </div>
     </div>
   )
 }
 
 export default function CardGrid({ cards = [], onCardClick }) {
-  const containerRef = useRef(null)
-  const [cols, setCols] = useState(4)
-
-  useEffect(() => {
-    const observer = new ResizeObserver(([entry]) => {
-      const w = entry.contentRect.width
-      if (w > 700)      setCols(4)
-      else if (w > 500) setCols(3)
-      else if (w > 300) setCols(2)
-      else              setCols(1)
-    })
-    if (containerRef.current) observer.observe(containerRef.current)
-    return () => observer.disconnect()
-  }, [])
-
   if (cards.length === 0) {
     return (
-      <div className="text-center py-12 text-stone-400 text-sm">
+      <div className="text-center py-16 text-stone-400 text-sm">
         Nenhuma carta carregada.
       </div>
     )
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="grid gap-4 p-4"
-      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
-    >
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-2">
       {cards.map(card => (
         <CardItem key={card.TCGAPIID} card={card} onCardClick={onCardClick} />
       ))}
