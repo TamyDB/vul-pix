@@ -3,6 +3,8 @@ export class Database {
         this.collections = {
             users: new Map(),
             cards: new Map(),
+            favorites: new Map(),
+            orders: new Map(),
         }
     }
 
@@ -15,7 +17,7 @@ export class Database {
     save(collection, data) {
         this.checkIfCollectionExists(collection)
         const id = crypto.randomUUID()
-        this.collections[collection].set(id, data)
+        this.collections[collection].set(id, { ...data, id })
 
         return id
     }

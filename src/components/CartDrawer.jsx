@@ -1,4 +1,5 @@
 import { FiX, FiShoppingCart, FiTrash2, FiMinus, FiPlus } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import Button from './ui/Button'
 
@@ -62,6 +63,7 @@ function CartItem({ item }) {
 
 export default function CartDrawer() {
   const { items, isOpen, setIsOpen, total, count } = useCart()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -125,7 +127,12 @@ export default function CartDrawer() {
             <p className="text-xs text-stone-400 -mt-1">
               Em até 4x R$ {fmt(total / 4)} sem juros
             </p>
-            <Button variant="primary" size="lg" className="w-full justify-center">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full justify-center"
+              onClick={() => { navigate('/checkout'); setIsOpen(false) }}
+            >
               Finalizar compra
             </Button>
             <Button

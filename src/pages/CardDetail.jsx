@@ -8,6 +8,8 @@ import SectionWrap from '../components/SectionWrap'
 import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
+import { useDb } from '../hooks/useDb'
 
 const tcgdex = new TCGdex('en')
 
@@ -96,10 +98,14 @@ export default function CardDetail() {
   const navigate    = useNavigate()
   const { addItem } = useCart()
 
+  const { user } = useAuth()
+  const db = useDb()
+
   const [card, setCard]           = useState(state?.card ?? null)
   const [loading, setLoading]     = useState(!state?.card)
   const [suggested, setSuggested] = useState([])
   const [liked, setLiked]         = useState(false)
+  const [favoriteId, setFavoriteId] = useState(null)
   const [added, setAdded]         = useState(false)
 
   const [originalPrice] = useState(() => +(Math.random() * 280 + 9.9).toFixed(2))
@@ -118,6 +124,17 @@ export default function CardDetail() {
       .catch(console.error)
       .finally(() => setLoading(false))
   }, [id])
+
+  // Sync favorite state from DB when card loads
+  useEffect(() => {
+    if (!user || !card) return
+    const favs = db.getAll('favorites')
+    const existing = favs.find(f => f.userId === user.id && f.card?.TCGAPIID === card.TCGAPIID)
+    if (existing) {
+      setLiked(true)
+      setFavoriteId(existing.id)
+    }
+  }, [user, card?.TCGAPIID])
 
   // Fetch suggested cards from same set
   useEffect(() => {
@@ -181,7 +198,16 @@ export default function CardDetail() {
             )}
             <button
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm hover:bg-white transition-all"
-              onClick={() => setLiked(l => !l)}
+              onClick={() => {
+                if (!user) { setLiked(l => !l); return }
+                if (liked && favoriteId) {
+                  db.delete('favorites', favoriteId)
+                  setLiked(false); setFavoriteId(null)
+                } else {
+                  const newId = db.save('favorites', { userId: user.id, card })
+                  setLiked(true); setFavoriteId(newId)
+                }
+              }}
             >
               <FiHeart
                 size={16}
