@@ -75,7 +75,7 @@ export default function Login() {
 
       <p className="text-center text-sm text-gray-500 mt-6">
         Não tem uma conta?{' '}
-        <Link to="/cadastro" className="text-brand-500 font-semibold hover:underline">
+        <Link to="/register" className="text-brand-500 font-semibold hover:underline">
           Cadastre-se
         </Link>
       </p>
